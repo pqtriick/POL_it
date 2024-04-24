@@ -1,0 +1,38 @@
+{
+	"nodes":[
+		{"id":"f4b7b253453dd9ad","type":"text","text":"Ist es möglich ein Microcontroller mit seinem Handy zu steuern?","x":-180,"y":-160,"width":345,"height":90,"color":"2"},
+		{"id":"669a39ef442cb474","type":"text","text":"App (Handy)","x":-462,"y":60,"width":250,"height":60,"color":"4"},
+		{"id":"0bd658fa217b554d","type":"text","text":"API (Raspberry Pi)","x":-132,"y":60,"width":250,"height":60,"color":"4"},
+		{"id":"ddc4d45ac39b535e","type":"text","text":"Client (Arduino/STM32)","x":198,"y":60,"width":250,"height":60,"color":"4"},
+		{"id":"18c00b072b03c14d","type":"text","text":"Flutter mit Dart","x":-462,"y":140,"width":250,"height":60,"color":"3"},
+		{"id":"9f2e3ce26d570957","type":"text","text":"Rocket mit Rust","x":-132,"y":140,"width":250,"height":60,"color":"3"},
+		{"id":"c59829db40215828","type":"text","text":"Arduino IDE mit C++/C","x":198,"y":140,"width":250,"height":60,"color":"3"},
+		{"id":"64dc850247c43fc7","type":"text","text":"Bewegung wird durch Buttons in der App gesteuert","x":-132,"y":380,"width":250,"height":120,"color":"1"},
+		{"id":"8de605297816af24","type":"text","text":"Bewegung nach rechts / links durch Handy Neigung (flutter_sensors )","x":165,"y":380,"width":250,"height":120,"color":"3"},
+		{"id":"510683add1c5cc8b","type":"text","text":"Einen Ablaufplan (Ähnlich wie Scratch Blöcke), mit dem man den Ablauf vom Auto bestimmen kann.","x":-430,"y":380,"width":250,"height":120,"color":"3"},
+		{"id":"b6078c4c88528661","type":"text","text":"Features","x":-132,"y":260,"width":250,"height":60,"color":"2"},
+		{"id":"68c2ad7090490998","type":"text","text":"Arduino steuert das Auto an","x":560,"y":120,"width":280,"height":50,"color":"1"},
+		{"id":"db492bd6047da981","type":"text","text":"Der PI sendet den Befehl über USART an den STM32","x":560,"y":30,"width":280,"height":60,"color":"5"},
+		{"id":"807660cdede16dfd","type":"text","text":"Nutzer sendet einen Befehl","x":560,"y":-160,"width":280,"height":50,"color":"4"},
+		{"id":"2b75e108ec3409f0","type":"text","text":"IP:Port/motor/front/right/0","x":880,"y":-69,"width":280,"height":60,"color":"3"},
+		{"id":"e9cb727b554c649b","type":"text","text":"App sendet eine HTTP-Anfrage an den PI","x":560,"y":-69,"width":280,"height":61,"color":"5"},
+		{"id":"f11a78a7219ed447","x":560,"y":240,"width":500,"height":500,"type":"file","file":"source.png"}
+	],
+	"edges":[
+		{"id":"c5110ec8d08aed12","fromNode":"669a39ef442cb474","fromSide":"right","toNode":"0bd658fa217b554d","toSide":"left"},
+		{"id":"a386750f53f26bea","fromNode":"0bd658fa217b554d","fromSide":"right","toNode":"ddc4d45ac39b535e","toSide":"left"},
+		{"id":"3c40574a97d6b6a0","fromNode":"f4b7b253453dd9ad","fromSide":"bottom","toNode":"0bd658fa217b554d","toSide":"top"},
+		{"id":"9f4c8e4f7eb4a5b4","fromNode":"f4b7b253453dd9ad","fromSide":"left","toNode":"669a39ef442cb474","toSide":"top"},
+		{"id":"116d36dbc10f54a1","fromNode":"f4b7b253453dd9ad","fromSide":"right","toNode":"ddc4d45ac39b535e","toSide":"top"},
+		{"id":"fc8c3d5bc0ec73fc","fromNode":"669a39ef442cb474","fromSide":"left","toNode":"18c00b072b03c14d","toSide":"left"},
+		{"id":"6753d9a96074fd12","fromNode":"ddc4d45ac39b535e","fromSide":"left","toNode":"c59829db40215828","toSide":"left"},
+		{"id":"a0aa6014bb8c6ab1","fromNode":"0bd658fa217b554d","fromSide":"left","toNode":"9f2e3ce26d570957","toSide":"left"},
+		{"id":"2940659374553811","fromNode":"b6078c4c88528661","fromSide":"bottom","toNode":"64dc850247c43fc7","toSide":"top"},
+		{"id":"e9ec051940ea41a3","fromNode":"b6078c4c88528661","fromSide":"right","toNode":"8de605297816af24","toSide":"top"},
+		{"id":"069cd3f2714a47dd","fromNode":"b6078c4c88528661","fromSide":"left","toNode":"510683add1c5cc8b","toSide":"top"},
+		{"id":"ef3e9d27052cf145","fromNode":"807660cdede16dfd","fromSide":"bottom","toNode":"e9cb727b554c649b","toSide":"top"},
+		{"id":"6cefc01f90e0dca8","fromNode":"e9cb727b554c649b","fromSide":"bottom","toNode":"db492bd6047da981","toSide":"top"},
+		{"id":"75de94a087574e1c","fromNode":"db492bd6047da981","fromSide":"bottom","toNode":"68c2ad7090490998","toSide":"top"},
+		{"id":"722e170d0c96b54a","fromNode":"e9cb727b554c649b","fromSide":"right","toNode":"2b75e108ec3409f0","toSide":"left"}
+	]
+}
