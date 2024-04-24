@@ -5,15 +5,15 @@ use crate::motor::{Direction, Side};
 #[get("/motor/direction/<side>/<direction>")]
 pub fn change_motor_direction(side: &str, direction: &str, hardware: &State<HardwareStatePointer>) -> String {
     let side = match side {
-        "right" => Side::RIGHT,
-        "left" => Side::LEFT,
+        "right" => Side::Right,
+        "left" => Side::Left,
         _ => {
             return format!("Invalid side {:?}", side);
         }
     };
     let direction = match direction {
-        "forward" => Direction::FORWARD,
-        "backward" => Direction::BACKWARD,
+        "forward" => Direction::Forward,
+        "backward" => Direction::Backward,
         _ => {
             return format!("Invalid direction {:?}", direction);
         }
@@ -26,8 +26,8 @@ pub fn change_motor_direction(side: &str, direction: &str, hardware: &State<Hard
 #[get("/motor/speed/<side>/<speed>")]
 pub fn change_motor_speed(side: &str, speed: u8, hardware: &State<HardwareStatePointer>) -> String {
     let side = match side {
-        "right" => Side::RIGHT,
-        "left" => Side::LEFT,
+        "right" => Side::Right,
+        "left" => Side::Left,
         _ => {
             return format!("Invalid side {:?}", side);
         }

@@ -29,7 +29,6 @@ impl HardwareState {
         let mut frame = BytesMut::new();
         frame.put_u8(packet_data.len() as u8);
         frame.put(packet_data);
-        println!("{:?}", frame);
         self.uart.write(frame.as_ref()).expect("Failed to write packet");
     }
     pub fn change_motor_direction(&mut self, side: &Side, direction: &Direction) {

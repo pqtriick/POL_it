@@ -1,13 +1,13 @@
 #[derive(Debug, Copy, Clone)]
 #[repr(u8)]
 pub enum Side {
-    RIGHT,
-    LEFT
+    Right,
+    Left
 }
 
 #[derive(Debug, Copy, Clone)]
 #[repr(u8)]
 pub enum Direction {
-    FORWARD,
-    BACKWARD
+    Forward,
+    Backward
 }
