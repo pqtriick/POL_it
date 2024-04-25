@@ -43,3 +43,7 @@ Direction Packet::readDirection() {
 Side Packet::readSide() {
     return static_cast<Side>(this->buffer[this->offset++]);
 }
+
+unsigned char Packet::readByte() {
+    return this->buffer[this->offset++];
+}

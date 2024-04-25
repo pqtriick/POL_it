@@ -30,6 +30,7 @@ class Packet {
         PacketType readType();
         Direction readDirection();
         Side readSide();
+        unsigned char readByte();
 };
 
 class Connection {
