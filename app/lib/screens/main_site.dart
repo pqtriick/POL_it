@@ -8,10 +8,35 @@ class main_site extends StatefulWidget {
   State<main_site> createState() => _MainPageState();
 }
 
+
 class _MainPageState extends State<main_site> {
+
+  final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
+  double slidervalue = 128.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _globalKey,
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            const Divider(thickness: 2,),
+            ListTile(
+              title: const Text('Startseite'),
+              onTap: (){
+                print('Menu click');
+              },),
+            const Divider(thickness: 2,),
+            ListTile(title: const Text('Route Builder'),
+              onTap: (){
+                print('Menu click');
+              },),
+            const Divider(thickness: 2,),
+
+          ],
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -22,7 +47,7 @@ class _MainPageState extends State<main_site> {
         child: SafeArea( //SafeArea makes the icon not in the mobile app bar
           child: Column(
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 40.0,
                   vertical: 25,
@@ -30,15 +55,19 @@ class _MainPageState extends State<main_site> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.menu,
-                      size: 40,
+                    IconButton(
+                      icon: Icon(Icons.menu),
+                      iconSize: 40,
                       color: Colors.black,
+                      onPressed: (){
+                        _globalKey.currentState?.openDrawer();
+                      }
                     ),
-                    Icon(
-                      Icons.screen_rotation,
-                      size: 40,
+                    IconButton(
+                      icon: Icon(Icons.screen_rotation),
+                      iconSize: 40,
                       color: Colors.black,
+                      onPressed: () {  },
                     )
                   ],
                 ),
@@ -72,8 +101,8 @@ class _MainPageState extends State<main_site> {
                       onLongPressStart: (_) {
                         Endpoint().sendMotorDirection(Side.left, Direction.forward);
                         Endpoint().sendMotorDirection(Side.right, Direction.forward);
-                        Endpoint().sendMotorSpeed(Side.left, 130);
-                        Endpoint().sendMotorSpeed(Side.right, 130);
+                        Endpoint().sendMotorSpeed(Side.left, slidervalue as int);
+                        Endpoint().sendMotorSpeed(Side.right, slidervalue as int);
                       },
                       onLongPressEnd: (_) {
                         Endpoint().sendMotorSpeed(Side.left, 0);
@@ -88,8 +117,8 @@ class _MainPageState extends State<main_site> {
                       onLongPressStart: (_) {
                         Endpoint().sendMotorDirection(Side.left, Direction.backward);
                         Endpoint().sendMotorDirection(Side.right, Direction.backward);
-                        Endpoint().sendMotorSpeed(Side.left, 255);
-                        Endpoint().sendMotorSpeed(Side.right, 255);
+                        Endpoint().sendMotorSpeed(Side.left, slidervalue as int);
+                        Endpoint().sendMotorSpeed(Side.right, slidervalue as int);
                       },
                       onLongPressEnd: (_) {
                         Endpoint().sendMotorSpeed(Side.left, 0);
@@ -112,9 +141,27 @@ class _MainPageState extends State<main_site> {
                         print('Fourth button pressed!');
                       },
                     ),
+
                   ],
                 ),
               ),
+              const SizedBox(height: 50),
+              Text('PWM : ${slidervalue.round()}',
+              style: (const TextStyle(color: Colors.black, fontSize: 30)),
+              ),
+              Slider(
+                value: slidervalue,
+                divisions: 127,
+                min: 128,
+                max: 255,
+                activeColor: Colors.indigoAccent,
+                inactiveColor: Colors.indigo,
+                onChanged: (double value) {
+                  setState(() {
+                    slidervalue = value;
+                  });
+                },
+              )
             ],
           ),
         ),
@@ -122,3 +169,4 @@ class _MainPageState extends State<main_site> {
     );
   }
 }
+
