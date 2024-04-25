@@ -1,4 +1,4 @@
-
+import 'package:car/network/Endpoint.dart';
 import 'package:flutter/material.dart';
 
 class main_site extends StatefulWidget {
@@ -64,21 +64,36 @@ class _MainPageState extends State<main_site> {
                   crossAxisCount: 2,
                   shrinkWrap: true,
                   children: [
-                    IconButton(
-
-                      icon: Icon(Icons.arrow_upward),
-                      iconSize: 50,
-                      onPressed: () {
-                        // Action for the first button
-                        print('First button pressed!');
+                    GestureDetector(
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_upward),
+                        iconSize: 50, onPressed: () {  },
+                      ),
+                      onLongPressStart: (_) {
+                        Endpoint().sendMotorDirection(Side.left, Direction.forward);
+                        Endpoint().sendMotorDirection(Side.right, Direction.forward);
+                        Endpoint().sendMotorSpeed(Side.left, 130);
+                        Endpoint().sendMotorSpeed(Side.right, 130);
+                      },
+                      onLongPressEnd: (_) {
+                        Endpoint().sendMotorSpeed(Side.left, 0);
+                        Endpoint().sendMotorSpeed(Side.right, 0);
                       },
                     ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_downward),
-                      iconSize: 50,
-                      onPressed: () {
-                        // Action for the second button
-                        print('Second button pressed!');
+                    GestureDetector(
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_downward),
+                        iconSize: 50, onPressed: () {  },
+                      ),
+                      onLongPressStart: (_) {
+                        Endpoint().sendMotorDirection(Side.left, Direction.backward);
+                        Endpoint().sendMotorDirection(Side.right, Direction.backward);
+                        Endpoint().sendMotorSpeed(Side.left, 255);
+                        Endpoint().sendMotorSpeed(Side.right, 255);
+                      },
+                      onLongPressEnd: (_) {
+                        Endpoint().sendMotorSpeed(Side.left, 0);
+                        Endpoint().sendMotorSpeed(Side.right, 0);
                       },
                     ),
                     IconButton(

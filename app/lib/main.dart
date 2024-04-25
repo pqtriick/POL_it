@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'main_site.dart';
+import 'screens/main_site.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
   void initState() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
