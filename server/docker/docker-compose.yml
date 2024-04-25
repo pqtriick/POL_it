@@ -1,0 +1,10 @@
+services:
+  server:
+    image: ghcr.io/httprafa/pol-it-car:latest
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    devices:
+      - "/dev/gpiomem:/dev/gpiomem"
+      - "/dev/gpiochip0:/dev/gpiochip0"
+      - "/dev/serial0:/dev/serial0"
