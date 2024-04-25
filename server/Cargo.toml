@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-#rocket = "0.5.0"
-#rppal = "0.17.1"
-#bytes = "1.6.0"
+rocket = "0.5.0"
+rppal = "0.17.1"
+bytes = "1.6.0"
