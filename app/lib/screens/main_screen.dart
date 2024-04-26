@@ -1,4 +1,5 @@
 import 'package:car/network/endpoint.dart';
+import 'package:car/screens/route_builder_screen.dart';
 import 'package:car/storage/state.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,9 @@ class _MainScreenState extends State<MainScreen> {
             const Divider(thickness: 2,),
             ListTile(title: const Text('Route Builder'),
               onTap: () {
-                print('Menu click');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const RouteBuilderScreen()),);
               },),
             const Divider(thickness: 2,),
           ],
