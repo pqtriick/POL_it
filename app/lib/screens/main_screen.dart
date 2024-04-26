@@ -1,5 +1,6 @@
 import 'package:car/screens/manual_control_screen.dart';
-import 'package:car/screens/route_builder/add_node_screen.dart';
+import 'package:car/screens/route_builder_screen.dart';
+import 'package:car/widget/default/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,7 +15,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
 
-  List<Widget> screens = [const ManualControlScreen(), const AddNodeScreen()];
+  List<Widget> screens = [const ManualControlScreen(), const RouteBuilderScreen()];
   int _selectedIndex = 0;
 
   @override
@@ -35,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
           ],
         ),
       ),
-      body: _getBody(),
+      body: screens[_selectedIndex],
     );
   }
 
@@ -44,14 +45,6 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _selectedIndex = index;
     });
-  }
-
-  Widget _getBody() {
-    if(_selectedIndex == 1) {
-      return const AddNodeScreen();
-    } else {
-      return const ManualControlScreen();
-    }
   }
 }
 
