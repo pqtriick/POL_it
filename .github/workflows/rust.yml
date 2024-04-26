@@ -1,0 +1,27 @@
+name: Rust
+on:
+  push:
+    paths:
+      - server/**
+env:
+  CARGO_TERM_COLOR: always
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: build-essential gcc-arm-linux-gnueabihf
+          version: 1.0
+      - name: Install required rust target
+        run: rustup target add arm-unknown-linux-gnueabihf
+      - name: Clean cargo folders
+        working-directory: ./server/
+        run: cargo clean
+      - name: Build server binary
+        working-directory: ./server/
+        run: cargo build --release --target=arm-unknown-linux-gnueabihf
