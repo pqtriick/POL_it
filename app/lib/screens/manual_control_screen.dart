@@ -19,7 +19,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
-      CustomAppBar("STM32 Car Controller", false, leading: IconButton(
+      CustomAppBar("STM32 Car Controller", leading: IconButton(
         icon: const Icon(Icons.screen_rotation),
         iconSize: 40,
         color: Colors.black,

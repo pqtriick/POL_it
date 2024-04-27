@@ -1,4 +1,3 @@
-import 'package:car/route/car_route.dart';
 import 'package:car/route/car_route_node.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +10,9 @@ class CarRouteNodeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(node.type.name),
-      subtitle: const Text("2 nodes"),
+      title: Text(node.directions.isNotEmpty ? "Move for ${node.time} sec" : "Delay for ${node.time} sec"),
+      subtitle: Text(
+          node.directions.isEmpty ? "No movement" : node.generateInfoText()),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -28,12 +28,11 @@ class CarRouteNodeListTile extends StatelessWidget {
             onPressed: () {},
             child: const Icon(
                 Icons.delete,
-                color: Colors.black
+                color: Colors.red
             ),
           ),
         ],
       ),
     );
   }
-
 }

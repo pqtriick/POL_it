@@ -8,5 +8,3 @@ Future main() async {
 
   runApp(const CarControlApp());
 }
-
-

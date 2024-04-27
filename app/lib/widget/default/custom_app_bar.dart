@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget {
 
   final String title;
-  final bool subMenu;
   final Widget? leading;
 
-  const CustomAppBar(this.title, this.subMenu, {super.key, this.leading});
+  const CustomAppBar(this.title, {super.key, this.leading});
 
   @override
   Widget build(BuildContext context) {
+    bool isSubMenu = Navigator.of(context).canPop();
+
     return Column(
       children: [
         Padding(
@@ -22,11 +23,11 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(subMenu ? Icons.arrow_left : Icons.menu),
+                icon: Icon(isSubMenu ? Icons.arrow_back : Icons.menu),
                 iconSize: 40,
                 color: Colors.black,
                 onPressed: () {
-                  if(subMenu) {
+                  if (isSubMenu) {
                     Navigator.pop(context);
                   } else {
                     MainScreen.globalKey.currentState?.openDrawer();
