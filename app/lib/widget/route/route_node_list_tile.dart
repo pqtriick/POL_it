@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 class CarRouteNodeListTile extends StatelessWidget {
 
   final CarRouteNode node;
+  final Function(CarRouteNode) editCallback;
+  final Function(CarRouteNode) deleteCallback;
 
-  const CarRouteNodeListTile(this.node, {super.key});
+  const CarRouteNodeListTile(this.node, this.editCallback, this.deleteCallback, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CarRouteNodeListTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => editCallback(node),
             child: const Icon(
                 Icons.edit,
                 color: Colors.black
@@ -25,7 +27,7 @@ class CarRouteNodeListTile extends StatelessWidget {
           ),
           const SizedBox(width: 8), // Add some space between buttons
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => deleteCallback(node),
             child: const Icon(
                 Icons.delete,
                 color: Colors.red

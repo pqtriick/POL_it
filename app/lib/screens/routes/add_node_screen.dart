@@ -8,9 +8,10 @@ import 'package:flutter/material.dart';
 class AddNodeScreen extends StatefulWidget {
 
   final List<CarRouteNode> nodes;
+  final CarRouteNode? copyNode;
   final Function(CarRouteNode) callback;
 
-  const AddNodeScreen(this.nodes, this.callback, {super.key});
+  const AddNodeScreen(this.nodes, this.callback, {super.key, this.copyNode});
 
   @override
   State<AddNodeScreen> createState() => _AddNodeScreenState();
@@ -20,8 +21,17 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
 
   double _sliderSpeedValue = Endpoint.maxSpeed.toDouble();
   double _sliderTimeValue = 10.toDouble();
+  Set<Direction> _directions = {};
 
-  final Set<Direction> directions = {};
+  @override
+  void initState() {
+    super.initState();
+    if(widget.copyNode != null) {
+      _sliderSpeedValue = widget.copyNode!.speed.toDouble();
+      _sliderTimeValue = widget.copyNode!.time.toDouble();
+      _directions = widget.copyNode!.directions.toSet();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,56 +45,56 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
           GestureDetector(
             child: IconButton(
               icon: const Icon(Icons.arrow_upward),
-              isSelected: directions.contains(Direction.forward),
+              isSelected: _directions.contains(Direction.forward),
               iconSize: 50, onPressed: () =>
                 setState(() {
-                  if (directions.contains(Direction.forward)) {
-                    directions.remove(Direction.forward);
+                  if (_directions.contains(Direction.forward)) {
+                    _directions.remove(Direction.forward);
                     return;
                   }
-                  directions.add(Direction.forward);
+                  _directions.add(Direction.forward);
                 }),
             ),
           ),
           GestureDetector(
             child: IconButton(
               icon: const Icon(Icons.arrow_downward),
-              isSelected: directions.contains(Direction.backward),
+              isSelected: _directions.contains(Direction.backward),
               iconSize: 50, onPressed: () =>
                 setState(() {
-                  if (directions.contains(Direction.backward)) {
-                    directions.remove(Direction.backward);
+                  if (_directions.contains(Direction.backward)) {
+                    _directions.remove(Direction.backward);
                     return;
                   }
-                  directions.add(Direction.backward);
+                  _directions.add(Direction.backward);
                 }),
             ),
           ),
           GestureDetector(
             child: IconButton(
               icon: const Icon(Icons.arrow_left),
-              isSelected: directions.contains(Direction.left),
+              isSelected: _directions.contains(Direction.left),
               iconSize: 50, onPressed: () =>
                 setState(() {
-                  if (directions.contains(Direction.left)) {
-                    directions.remove(Direction.left);
+                  if (_directions.contains(Direction.left)) {
+                    _directions.remove(Direction.left);
                     return;
                   }
-                  directions.add(Direction.left);
+                  _directions.add(Direction.left);
                 }),
             ),
           ),
           GestureDetector(
             child: IconButton(
               icon: const Icon(Icons.arrow_right),
-              isSelected: directions.contains(Direction.right),
+              isSelected: _directions.contains(Direction.right),
               iconSize: 50, onPressed: () =>
                 setState(() {
-                  if (directions.contains(Direction.right)) {
-                    directions.remove(Direction.right);
+                  if (_directions.contains(Direction.right)) {
+                    _directions.remove(Direction.right);
                     return;
                   }
-                  directions.add(Direction.right);
+                  _directions.add(Direction.right);
                 }),
             ),
           )
@@ -135,9 +145,16 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
   }
 
   void _addNode() {
-    var node = CarRouteNode(directions.toList(), _sliderSpeedValue.toInt(),
-        _sliderTimeValue.toInt());
-    widget.callback(node);
+    if(widget.copyNode != null) {
+      widget.copyNode!.directions = _directions.toList();
+      widget.copyNode!.speed = _sliderSpeedValue.toInt();
+      widget.copyNode!.time = _sliderTimeValue.toInt();
+      widget.callback(widget.copyNode!);
+    } else {
+      var node = CarRouteNode(_directions.toList(), _sliderSpeedValue.toInt(),
+          _sliderTimeValue.toInt());
+      widget.callback(node);
+    }
 
     Navigator.pop(context);
   }

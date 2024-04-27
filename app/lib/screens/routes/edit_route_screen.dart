@@ -1,4 +1,5 @@
 import 'package:car/route/car_route.dart';
+import 'package:car/route/car_route_node.dart';
 import 'package:car/screens/routes/add_node_screen.dart';
 import 'package:car/widget/default/custom_app_bar.dart';
 import 'package:car/widget/default/screen_container.dart';
@@ -49,11 +50,22 @@ class EditRouteScreenState extends State<EditRouteScreen> {
       Expanded(child: Scrollbar(
         child: ListView(
           children: [
-            for (var node in widget.route.nodes) CarRouteNodeListTile(node)
+            for (var node in widget.route.nodes) CarRouteNodeListTile(
+                node, _editNode, _deleteNode)
           ],
         ),
       ))
     ]);
+  }
+
+  void _editNode(CarRouteNode node) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AddNodeScreen(widget.route.nodes, (node) => setState(() {}), copyNode: node)));
+  }
+
+  void _deleteNode(CarRouteNode node) {
+    setState(() {
+      widget.route.nodes.remove(node);
+    });
   }
 
   void _addNode() {
