@@ -22,6 +22,7 @@ class CarRoute {
       await node.runNode();
     }
     await endpoint.stopAll();
+    stopCurrent();
   }
 
   bool isRunning() {

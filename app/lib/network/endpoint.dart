@@ -55,28 +55,32 @@ class Endpoint {
   }
 
   Future sendDirectionToAll(MotorDirection direction) async {
-    for (var side in MotorSide.values) {
-      await sendDirection(side, direction);
-    }
+    await Future.wait([
+      for (var side in MotorSide.values) sendDirection(side, direction)
+    ]);
   }
 
   Future inDirectionWithSpeed(MotorDirection direction, int speed) async {
+    var requests = <Future>[];
     for (var side in MotorSide.values) {
-      await sendDirection(side, direction);
-      await sendSpeed(side, speed);
+      requests.add(sendDirection(side, direction));
+      requests.add(sendSpeed(side, speed));
     }
+    await Future.wait(requests);
   }
 
   Future withSpeed(int speed) async {
-    for (var side in MotorSide.values) {
-      await sendSpeed(side, speed);
-    }
+    await Future.wait([
+      for (var side in MotorSide.values)
+        sendSpeed(side, speed)
+    ]);
   }
 
   Future stopAll() async {
-    for (var side in MotorSide.values) {
-      await sendSpeed(side, 0);
-    }
+    await Future.wait([
+      for (var side in MotorSide.values)
+        sendSpeed(side, 0)
+    ]);
   }
 
   factory Endpoint.fromJson(Map<String, dynamic> json) =>

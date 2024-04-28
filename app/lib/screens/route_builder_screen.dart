@@ -46,12 +46,16 @@ class RouteBuilderScreenState extends State<RouteBuilderScreen> {
     ]);
   }
 
-  void _runRoute(CarRoute route) async {
-    await route.run();
+  void _runRoute(CarRoute route) {
+    setState(() {
+      route.run();
+    });
   }
 
-  void _stopRoute(CarRoute route) async {
-    CarRoute.stopCurrent();
+  void _stopRoute(CarRoute route) {
+    setState(() {
+      CarRoute.stopCurrent();
+    });
   }
 
   void _editRoute(CarRoute route) {
