@@ -38,7 +38,7 @@ class _MainScreenState extends State<MainScreen> {
                 onTap: () => _setPage(1)),
             const Divider(thickness: 2),
             ListTile(title: const Text('Settings'),
-                onTap: () => _setPage(2),
+                onTap: () => _setPage(2)),
             const Divider(thickness: 2)
           ],
         ),
