@@ -15,13 +15,13 @@ class SettingsScreen extends StatefulWidget {
 
 class SettingsScreenState extends State<SettingsScreen> {
 
-  static final adressController = TextEditingController();
+  static final addressController = TextEditingController();
   final Endpoint endpoint = AppStorage.pullEndpoint();
 
   @override
   void initState() {
     super.initState();
-    adressController.text = endpoint.address;
+    addressController.text = endpoint.address;
   }
 
   @override
@@ -37,14 +37,14 @@ class SettingsScreenState extends State<SettingsScreen> {
       const SizedBox(height: 25),
       Padding(padding: const EdgeInsets.only(left: 20, right: 20),
       child: TextField(decoration: const InputDecoration(hintText: "IP Adress"),
-      controller: adressController))
+      controller: addressController))
     ]);
 
   }
 
   void _saveSettings() {
-    if (adressController.text.isNotEmpty) {
-      endpoint.address = adressController.text;
+    if (addressController.text.isNotEmpty) {
+      endpoint.address = addressController.text;
       AppStorage.writeEndpoint(endpoint);
     } else {
       const snackBar = SnackBar(content: Text(
