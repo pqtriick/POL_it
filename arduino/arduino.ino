@@ -1,101 +1,76 @@
+#include "communication.hpp"
+#include "motor.hpp"
 
-#define right_top A0
-#define right_bot A1
-#define left_top A2
-#define left_bot A3
-#define speedPinR 
-#define speedPinL 
+static HardwareSerial* piSerial = new HardwareSerial(USART1);
+static Connection* connection = new Connection(piSerial);
 
-
-int speed;
-int pins[] = {A0, A1, A2, A3};
-
-enum Direction {
-  FORWARD,
-  FORWARD_R,
-  FORWARD_L,
-  BACK,
-  BACK_R,
-  BACK_L
-};
+static Motor* rightSide = new Motor("Right", A1, A0, A2);
+static Motor* leftSide = new Motor("Left", A3, A4, A5);
 
 void setup() {
+  // Setup debug connection to computer
+  Serial.begin(115200L);
+  Serial.println("[INIT]");
 
-  pinMode(A0, OUTPUT);
-  pinMode(A1, OUTPUT);
-  pinMode(A2, OUTPUT);
-  pinMode(A3, OUTPUT);
-  
-  analogWriteResolution(8);
-  Serial.begin(9600);
-  
+  // Setup motors
+  rightSide->init();
+  leftSide->init();
+
+  // Setup connection to Raspberry PI over USART
+  connection->setup(115200L);
+
+  Serial.println("[INIT] OK");
 }
 
 void loop() {
-  //move(getSpeed(), DIRECTION) //Direction is missing
+  // Check if packet is available
+  if(connection->available()) {
+    // Read packet from USART
+    Packet* packet = connection->readPacket();
+    // Handle the packet
+    handlePacket(packet);
 
+    // FREE: We have to free the packet!
+    delete packet;
+  }
 }
 
-
-void setSpeed(int s, int pin) {
-  speed = s;
-  analogWrite(pin, speed);
+void changeMotorSpeed(Side side, unsigned char speed) {
+  Motor* motor = sideToMotor(side);
+  motor->setSpeed(speed);
 }
 
-int getSpeed() {
-  return speed;
-
+void changeMotorDirection(Side side, Direction direction) {
+  Motor* motor = sideToMotor(side);
+  motor->setDirection(direction);
 }
 
-void move(int s, Direction direction) {
-  switch(direction) {
-    case FORWARD:
-      for (int i = 0; i < 4; i++) {
-        digitalWrite(pins[i], 0);
-        digitalWrite(right_bot, 1);
-        digitalWrite(left_bot, 1);
-        analogWrite(pins[i], s);
-      }
-      break;
-    case FORWARD_R:
-      for (int i = 0; i < 4; i++) {
-        digitalWrite(pins[i], 0);
-        digitalWrite(left_bot, 1);
-        analogWrite(pins[i], s);
-      }
-      break;
-    case FORWARD_L:
-      for (int i = 0; i < 4; i++) {
-        digitalWrite(pins[i], 0);
-        digitalWrite(right_bot, 1);
-        analogWrite(pins[i], s);
-      } 
-      break;
-    case BACK:
-      for (int i = 0; i < 4; i++) {
-        digitalWrite(pins[i], 0);
-        digitalWrite(right_top, 1);
-        digitalWrite(left_top, 1);
-        analogWrite(pins[i], s);
-      } 
-      break;
-    case BACK_R:
-      for (int i = 0; i < 4; i++) {
-        digitalWrite(pins[i], 0);
-        digitalWrite(right_top, 1);
-        analogWrite(pins[i], s);
-      }
-      break;
-    case BACK_L:
-      for (int i = 0; i < 4; i++) {
-        digitalWrite(pins[i], 0);
-        digitalWrite(left_top, 1);
-        analogWrite(pins[i], s);
-      }
-      break;
-  } 
-
+Motor* sideToMotor(Side side) {
+  switch(side) {
+    case Side::RIGHT: {
+      return rightSide;
+    }
+    case Side::LEFT: {
+      return leftSide;
+    }
+  }
 }
 
+void handlePacket(Packet* packet) {
+  PacketType type = packet->readType();
 
-
+  switch(type) {
+    case PacketType::MOTOR_DIRECTION: {
+      Side side = packet->readSide();
+      Direction direction = packet->readDirection();
+      changeMotorDirection(side, direction);
+      break;
+    }
+    case PacketType::MOTOR_SPEED: {
+      Side side = packet->readSide();
+      unsigned char speed = packet->readByte();
+      changeMotorSpeed(side, speed);
+      break;
+    }
+  }
+}
