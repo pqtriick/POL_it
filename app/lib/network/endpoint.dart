@@ -40,42 +40,42 @@ class Endpoint {
     return http.get(Uri.parse(buffer.toString()));
   }
 
-  void sendDirection(MotorSide side, MotorDirection direction) async {
+  Future sendDirection(MotorSide side, MotorDirection direction) async {
     try {
       await _sendUpdate(
           Target.motor, [MotorValue.direction.name, side.name, direction.name]);
     } catch (_) {}
   }
 
-  void sendSpeed(MotorSide side, int speed) async {
+  Future sendSpeed(MotorSide side, int speed) async {
     try {
       await _sendUpdate(
           Target.motor, [MotorValue.speed.name, side.name, speed.toString()]);
     } catch (_) {}
   }
 
-  void sendDirectionToAll(MotorDirection direction) {
+  Future sendDirectionToAll(MotorDirection direction) async {
     for (var side in MotorSide.values) {
-      sendDirection(side, direction);
+      await sendDirection(side, direction);
     }
   }
 
-  void inDirectionWithSpeed(MotorDirection direction, int speed) {
+  Future inDirectionWithSpeed(MotorDirection direction, int speed) async {
     for (var side in MotorSide.values) {
-      sendDirection(side, direction);
-      sendSpeed(side, speed);
+      await sendDirection(side, direction);
+      await sendSpeed(side, speed);
     }
   }
 
-  void withSpeed(int speed) {
+  Future withSpeed(int speed) async {
     for (var side in MotorSide.values) {
-      sendSpeed(side, speed);
+      await sendSpeed(side, speed);
     }
   }
 
-  void stopAll() {
+  Future stopAll() async {
     for (var side in MotorSide.values) {
-      sendSpeed(side, 0);
+      await sendSpeed(side, 0);
     }
   }
 

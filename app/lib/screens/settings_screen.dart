@@ -36,10 +36,10 @@ class SettingsScreenState extends State<SettingsScreen> {
       )),
       const SizedBox(height: 25),
       Padding(padding: const EdgeInsets.only(left: 20, right: 20),
-      child: TextField(decoration: const InputDecoration(hintText: "IP Adress"),
-      controller: addressController))
+          child: TextField(
+              decoration: const InputDecoration(hintText: "IP Adress"),
+              controller: addressController))
     ]);
-
   }
 
   void _saveSettings() {
@@ -48,12 +48,10 @@ class SettingsScreenState extends State<SettingsScreen> {
       AppStorage.writeEndpoint(endpoint);
     } else {
       const snackBar = SnackBar(content: Text(
-        "Enter a valid IP Adress"
+          "Enter a valid IP Adress"
       ));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-
   }
-
 
 }

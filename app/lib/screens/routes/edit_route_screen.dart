@@ -59,7 +59,9 @@ class EditRouteScreenState extends State<EditRouteScreen> {
   }
 
   void _editNode(CarRouteNode node) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AddNodeScreen(widget.route.nodes, (node) => setState(() {}), copyNode: node)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) =>
+        AddNodeScreen(
+            widget.route.nodes, (node) => setState(() {}), copyNode: node)));
   }
 
   void _deleteNode(CarRouteNode node) {

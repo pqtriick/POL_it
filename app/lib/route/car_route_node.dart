@@ -1,4 +1,6 @@
 import 'package:car/storage/state.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/scheduler.dart';
 
 class CarRouteNode {
 
@@ -8,17 +10,10 @@ class CarRouteNode {
 
   CarRouteNode(this.directions, this.speed, this.time);
 
-  factory CarRouteNode.fromJson(Map<String, dynamic> json) =>
-      CarRouteNode(List<Direction>.from(
-          json["directions"].map((e) => Direction.fromJson(e))), json["speed"],
-          json["time"]);
-
-  Map<String, dynamic> toJson() =>
-      {
-        "directions": directions,
-        "speed": speed,
-        "time": time
-      };
+  Future runNode() async {
+    await CarState.sendUpdates(directions.toSet(), speed);
+    await Future.delayed(Duration(seconds: time));
+  }
 
   String generateInfoText() {
     final buffer = StringBuffer();
@@ -33,5 +28,17 @@ class CarRouteNode {
 
     return buffer.toString();
   }
+
+  factory CarRouteNode.fromJson(Map<String, dynamic> json) =>
+      CarRouteNode(List<Direction>.from(
+          json["directions"].map((e) => Direction.fromJson(e))), json["speed"],
+          json["time"]);
+
+  Map<String, dynamic> toJson() =>
+      {
+        "directions": directions,
+        "speed": speed,
+        "time": time
+      };
 
 }

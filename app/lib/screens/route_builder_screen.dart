@@ -39,13 +39,19 @@ class RouteBuilderScreenState extends State<RouteBuilderScreen> {
       Expanded(child: Scrollbar(
         child: ListView(
           children: [
-            for (var route in routes) CarRouteListTile(route, (route) {
-              // When the play button is pressed
-            }, _editRoute)
+            for (var route in routes) CarRouteListTile(route, _runRoute, _stopRoute, _editRoute)
           ],
         ),
       ))
     ]);
+  }
+
+  void _runRoute(CarRoute route) async {
+    await route.run();
+  }
+
+  void _stopRoute(CarRoute route) async {
+    CarRoute.stopCurrent();
   }
 
   void _editRoute(CarRoute route) {

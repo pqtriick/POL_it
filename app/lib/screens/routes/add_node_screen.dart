@@ -26,7 +26,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
   @override
   void initState() {
     super.initState();
-    if(widget.copyNode != null) {
+    if (widget.copyNode != null) {
       _sliderSpeedValue = widget.copyNode!.speed.toDouble();
       _sliderTimeValue = widget.copyNode!.time.toDouble();
       _directions = widget.copyNode!.directions.toSet();
@@ -145,7 +145,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
   }
 
   void _addNode() {
-    if(widget.copyNode != null) {
+    if (widget.copyNode != null) {
       widget.copyNode!.directions = _directions.toList();
       widget.copyNode!.speed = _sliderSpeedValue.toInt();
       widget.copyNode!.time = _sliderTimeValue.toInt();
