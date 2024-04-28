@@ -37,7 +37,6 @@ class AppStorage {
       return _endpointCache!;
     }
     return Endpoint("192.168.0.144:8000");
-    // TODO: Add UI for adding the address of the car return null;
   }
 
   static List<CarRoute> pullRoutes() {
