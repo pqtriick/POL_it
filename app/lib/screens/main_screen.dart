@@ -1,5 +1,6 @@
 import 'package:car/screens/manual_control_screen.dart';
 import 'package:car/screens/route_builder_screen.dart';
+import 'package:car/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,8 @@ class _MainScreenState extends State<MainScreen> {
 
   List<Widget> screens = [
     const ManualControlScreen(),
-    const RouteBuilderScreen()
+    const RouteBuilderScreen(),
+    const SettingsScreen()
   ];
   int _selectedIndex = 0;
 
@@ -35,6 +37,9 @@ class _MainScreenState extends State<MainScreen> {
             ListTile(title: const Text('Route Builder'),
                 onTap: () => _setPage(1)),
             const Divider(thickness: 2),
+            ListTile(title: const Text('Settings'),
+              onTap: () => _setPage(2),
+            )
           ],
         ),
       ),
