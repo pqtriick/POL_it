@@ -26,18 +26,17 @@ class AppStorage {
     await _preferences.setString(_keyRoutes, jsonEncode(routes));
   }
 
-  static Endpoint? pullEndpoint() {
+  static Endpoint pullEndpoint() {
     if (_endpointCache != null) {
-      return _endpointCache;
+      return _endpointCache!;
     }
 
     final data = _preferences.getString(_keyEndpoint);
     if (data != null) {
       _endpointCache = jsonDecode(data);
-      return _endpointCache;
+      return _endpointCache!;
     }
     return Endpoint("192.168.0.144:8000");
-    // TODO: Add UI for adding the address of the car return null;
   }
 
   static List<CarRoute> pullRoutes() {
