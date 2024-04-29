@@ -34,10 +34,10 @@ class _MainScreenState extends State<MainScreen> {
                 title: const Text('Startseite'),
                 onTap: () => _setPage(0)),
             const Divider(thickness: 2),
-            ListTile(title: const Text('Route Builder'),
+            ListTile(title: const Text('Routen Ersteller'),
                 onTap: () => _setPage(1)),
             const Divider(thickness: 2),
-            ListTile(title: const Text('Settings'),
+            ListTile(title: const Text('Einstellungen'),
                 onTap: () => _setPage(2)),
             const Divider(thickness: 2)
           ],

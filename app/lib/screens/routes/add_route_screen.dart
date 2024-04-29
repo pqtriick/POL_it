@@ -22,7 +22,7 @@ class AddRouteScreenState extends State<AddRouteScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
-      CustomAppBar("Add route", leading: IconButton(
+      CustomAppBar("Route hinzufügen", leading: IconButton(
         icon: const Icon(Icons.save),
         iconSize: 40,
         color: Colors.black,
@@ -38,7 +38,7 @@ class AddRouteScreenState extends State<AddRouteScreen> {
   void _addRoute() {
     if (nameController.text.isEmpty) {
       const snackBar = SnackBar(content: Text(
-          "Please enter a valid name"));
+          "Gebe einen richtigen Namen ein."));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       return;
     }
@@ -55,7 +55,7 @@ class AddRouteScreenState extends State<AddRouteScreen> {
     }
 
     const snackBar = SnackBar(content: Text(
-        "There is already a route with the same name"));
+        "Es exisitiert bereits eine Route mit diesem Namen."));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 

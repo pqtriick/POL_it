@@ -27,7 +27,7 @@ class SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
-      CustomAppBar("Settings", leading: IconButton(
+      CustomAppBar("Einstellungen", leading: IconButton(
         icon: const Icon(Icons.save),
         iconSize: 40,
         color: Colors.black,
@@ -37,7 +37,7 @@ class SettingsScreenState extends State<SettingsScreen> {
       const SizedBox(height: 25),
       Padding(padding: const EdgeInsets.only(left: 20, right: 20),
           child: TextField(
-              decoration: const InputDecoration(hintText: "IP Adress"),
+              decoration: const InputDecoration(hintText: "IP Adresse"),
               controller: addressController))
     ]);
   }
@@ -46,9 +46,12 @@ class SettingsScreenState extends State<SettingsScreen> {
     if (addressController.text.isNotEmpty) {
       endpoint.address = addressController.text;
       AppStorage.writeEndpoint(endpoint);
+      const snackBar = SnackBar(content: Text(
+          "Einstellung wurde gespeichert."));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       const snackBar = SnackBar(content: Text(
-          "Enter a valid IP Adress"
+          "Gebe eine richtige IP Adresse an."
       ));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
