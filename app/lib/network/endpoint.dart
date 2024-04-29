@@ -40,43 +40,47 @@ class Endpoint {
     return http.get(Uri.parse(buffer.toString()));
   }
 
-  void sendDirection(MotorSide side, MotorDirection direction) async {
+  Future sendDirection(MotorSide side, MotorDirection direction) async {
     try {
       await _sendUpdate(
           Target.motor, [MotorValue.direction.name, side.name, direction.name]);
     } catch (_) {}
   }
 
-  void sendSpeed(MotorSide side, int speed) async {
+  Future sendSpeed(MotorSide side, int speed) async {
     try {
       await _sendUpdate(
           Target.motor, [MotorValue.speed.name, side.name, speed.toString()]);
     } catch (_) {}
   }
 
-  void sendDirectionToAll(MotorDirection direction) {
-    for (var side in MotorSide.values) {
-      sendDirection(side, direction);
-    }
+  Future sendDirectionToAll(MotorDirection direction) async {
+    await Future.wait([
+      for (var side in MotorSide.values) sendDirection(side, direction)
+    ]);
   }
 
-  void inDirectionWithSpeed(MotorDirection direction, int speed) {
+  Future inDirectionWithSpeed(MotorDirection direction, int speed) async {
+    var requests = <Future>[];
     for (var side in MotorSide.values) {
-      sendDirection(side, direction);
-      sendSpeed(side, speed);
+      requests.add(sendDirection(side, direction));
+      requests.add(sendSpeed(side, speed));
     }
+    await Future.wait(requests);
   }
 
-  void withSpeed(int speed) {
-    for (var side in MotorSide.values) {
-      sendSpeed(side, speed);
-    }
+  Future withSpeed(int speed) async {
+    await Future.wait([
+      for (var side in MotorSide.values)
+        sendSpeed(side, speed)
+    ]);
   }
 
-  void stopAll() {
-    for (var side in MotorSide.values) {
-      sendSpeed(side, 0);
-    }
+  Future stopAll() async {
+    await Future.wait([
+      for (var side in MotorSide.values)
+        sendSpeed(side, 0)
+    ]);
   }
 
   factory Endpoint.fromJson(Map<String, dynamic> json) =>
