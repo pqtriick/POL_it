@@ -1,8 +1,12 @@
+import "dart:async";
+
+import "package:car/control/phone_tilt_handler.dart";
 import "package:car/network/endpoint.dart";
 import "package:car/storage/state.dart";
 import "package:car/widget/default/custom_app_bar.dart";
 import "package:car/widget/default/screen_container.dart";
 import "package:flutter/material.dart";
+import "package:sensors_plus/sensors_plus.dart";
 
 class ManualControlScreen extends StatefulWidget {
   const ManualControlScreen({super.key});
@@ -11,8 +15,9 @@ class ManualControlScreen extends StatefulWidget {
   State<ManualControlScreen> createState() => _ManualControlScreenState();
 }
 
-
 class _ManualControlScreenState extends State<ManualControlScreen> {
+
+  StreamSubscription<AccelerometerEvent>? _streamSubscription;
 
   double _sliderValue = Endpoint.maxSpeed.toDouble();
 
@@ -23,7 +28,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
         icon: const Icon(Icons.screen_rotation),
         iconSize: 40,
         color: Colors.black,
-        onPressed: () {},
+        onPressed: _toggleTiltControls,
       )),
       const SizedBox(height: 120),
       //Space Between Title and Button Container
@@ -89,5 +94,33 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
       )
     ]);
   }
+
+  void _toggleTiltControls() {
+    if(_streamSubscription != null) {
+      _streamSubscription!.cancel();
+      _streamSubscription = null;
+      CarState.reset();
+      const snackBar = SnackBar(content: Text(
+          "Handy dreh Modus deaktiviert."));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      _streamSubscription = accelerometerEventStream().listen((event) => TiltHandler.handleTilt(event.x));
+      const snackBar = SnackBar(content: Text(
+          "Handy dreh Modus aktiviert."));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if(_streamSubscription != null) _streamSubscription!.cancel();
+  }
+
 }
 
