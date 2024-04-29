@@ -1,7 +1,7 @@
-import 'package:car/screens/manual_control_screen.dart';
-import 'package:car/screens/route_builder_screen.dart';
-import 'package:car/screens/settings_screen.dart';
-import 'package:flutter/material.dart';
+import "package:car/screens/manual_control_screen.dart";
+import "package:car/screens/route_builder_screen.dart";
+import "package:car/screens/settings_screen.dart";
+import "package:flutter/material.dart";
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -31,13 +31,13 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             const Divider(thickness: 2),
             ListTile(
-                title: const Text('Startseite'),
+                title: const Text("Startseite"),
                 onTap: () => _setPage(0)),
             const Divider(thickness: 2),
-            ListTile(title: const Text('Routen Ersteller'),
+            ListTile(title: const Text("Routen Ersteller"),
                 onTap: () => _setPage(1)),
             const Divider(thickness: 2),
-            ListTile(title: const Text('Einstellungen'),
+            ListTile(title: const Text("Einstellungen"),
                 onTap: () => _setPage(2)),
             const Divider(thickness: 2)
           ],

@@ -1,0 +1,45 @@
+name: Build and upload app
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - app/**
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, 'ci skip')"
+    steps:
+      - name: Run find-and-replace to remove slashes
+        uses: mad9000/actions-find-and-replace-string@5
+        id: remove-slashes
+        with:
+          source: ${{ github.ref_name }}
+          find: '/'
+          replace: '-'
+      - uses: josStorer/get-current-time@v2
+        id: current-time
+        with:
+          format: DD-MM-YYYY-hh-mm-ss
+          utcOffset: "+02:00"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+            channel: stable
+      - name: Clean flutter cache
+        working-directory: ./app/
+        run: flutter clean
+      - name: Build apk
+        working-directory: ./app/
+        run: flutter build apk
+      - name: Copy files
+        run: |
+          mv app/build/app/outputs/flutter-apk/app-release.apk app+${{ steps.remove-slashes.outputs.value }}.${{ github.run_number }}.apk
+      - name: "Upload file"
+        uses: appleboy/discord-action@master
+        with:
+          webhook_id: ${{ secrets.WEBHOOK_ID }}
+          webhook_token: ${{ secrets.WEBHOOK_TOKEN }}
+          message: "Build of app finished [${{ steps.current-time.outputs.readableTime }}]"
+          file: "./app+${{ steps.remove-slashes.outputs.value }}.${{ github.run_number }}.apk"

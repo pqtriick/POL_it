@@ -1,5 +1,5 @@
-import 'package:car/route/car_route_node.dart';
-import 'package:flutter/material.dart';
+import "package:car/route/car_route_node.dart";
+import "package:flutter/material.dart";
 
 class CarRouteNodeListTile extends StatelessWidget {
 
@@ -14,8 +14,8 @@ class CarRouteNodeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(node.directions.isNotEmpty
-          ? "Bewege für ${node.time} Sekunden"
-          : "Warte für ${node.time} Sekunden"),
+          ? "Bewege für ${node.time} ms"
+          : "Warte für ${node.time} ms"),
       subtitle: Text(
           node.directions.isEmpty ? "Keine Bewegung" : node.generateInfoText()),
       trailing: Row(

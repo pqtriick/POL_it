@@ -1,8 +1,8 @@
-import 'package:car/network/endpoint.dart';
-import 'package:car/storage/state.dart';
-import 'package:car/widget/default/custom_app_bar.dart';
-import 'package:car/widget/default/screen_container.dart';
-import 'package:flutter/material.dart';
+import "package:car/network/endpoint.dart";
+import "package:car/storage/state.dart";
+import "package:car/widget/default/custom_app_bar.dart";
+import "package:car/widget/default/screen_container.dart";
+import "package:flutter/material.dart";
 
 class ManualControlScreen extends StatefulWidget {
   const ManualControlScreen({super.key});
@@ -69,7 +69,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
         ),
       ),
       const SizedBox(height: 50),
-      Text('Geschwindigkeit (PWM) : ${_sliderValue.round()}',
+      Text("PWM : ${_sliderValue.round()}",
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(
