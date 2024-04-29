@@ -36,7 +36,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
-      const CustomAppBar("STM32 Car Control"),
+      const CustomAppBar("STM32 Auto Steuerung"),
       const SizedBox(height: 120),
       GridView.count(
         crossAxisCount: 4,
@@ -119,7 +119,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
               })
       ),
       const SizedBox(height: 20,),
-      Text('Time : ${_sliderTimeValue.round()} seconds',
+      Text('Dauer : ${_sliderTimeValue.round()} Sekunden',
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(

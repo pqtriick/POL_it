@@ -77,6 +77,7 @@ class RouteBuilderScreenState extends State<RouteBuilderScreen> {
             setState(() {
               routes.add(route);
               AppStorage.writeRoutes(routes);
+
             }))));
   }
 

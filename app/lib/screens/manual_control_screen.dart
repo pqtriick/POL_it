@@ -19,7 +19,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
-      CustomAppBar("STM32 Car Controller", leading: IconButton(
+      CustomAppBar("STM32 Auto Steuerung", leading: IconButton(
         icon: const Icon(Icons.screen_rotation),
         iconSize: 40,
         color: Colors.black,
@@ -69,7 +69,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
         ),
       ),
       const SizedBox(height: 50),
-      Text('PWM : ${_sliderValue.round()}',
+      Text('Geschwindigkeit (PWM) : ${_sliderValue.round()}',
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(
