@@ -1,3 +1,4 @@
+import "package:car/control/phone_tilt_handler.dart";
 import "package:car/network/endpoint.dart";
 import "package:car/storage/state.dart";
 import "package:car/widget/default/custom_app_bar.dart";
@@ -23,7 +24,9 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
         icon: const Icon(Icons.screen_rotation),
         iconSize: 40,
         color: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          Tilt_Handler.setState();
+        },
       )),
       const SizedBox(height: 120),
       //Space Between Title and Button Container
