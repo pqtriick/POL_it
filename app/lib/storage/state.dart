@@ -84,11 +84,26 @@ class CarState {
     }
   }
 
+  static void removeDirection2(Direction movement1, Direction movement2) {
+    bool result1 = _directions.remove(movement1);
+    bool result2 = _directions.remove(movement2);
+    if(result1 || result2) {
+      _sendUpdates();
+    }
+  }
+
   static void setPreferredSpeed(int speed) {
     if (_preferredSpeed == speed) return;
 
     _preferredSpeed = speed.clamp(Endpoint.driveMinSpeed, Endpoint.maxSpeed);
     _sendUpdates();
+  }
+
+  static void reset() {
+    if(_directions.isNotEmpty) {
+      _directions.clear();
+      _sendUpdates();
+    }
   }
 
 }
