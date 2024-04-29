@@ -1,6 +1,7 @@
-name: Rust
+name: Build an upload server
 on:
   push:
+    branches: ["main"]
     paths:
       - server/**
 env:
@@ -10,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     steps:
-      - name: checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: awalsh128/cache-apt-pkgs-action@latest
+      - name: Run find-and-replace to remove slashes
+        uses: mad9000/actions-find-and-replace-string@5
+        id: remove-slashes
         with:
-          packages: build-essential gcc-arm-linux-gnueabihf
-          version: 1.0
-      - name: Install required rust target
-        run: rustup target add arm-unknown-linux-gnueabihf
-      - name: Clean cargo folders
+          source: ${{ github.ref_name }}
+          find: '/'
+          replace: '-'
+      - name: Build and push the image
         working-directory: ./server/
-        run: cargo clean
-      - name: Build server binary
-        working-directory: ./server/
-        run: cargo build --release --target=arm-unknown-linux-gnueabihf
+        run: |
+          docker login --username ${{ secrets.DOCKER_USERNAME }} --password ${{ secrets.DOCKER_PAT }} ghcr.io
+          docker build . -t ghcr.io/httprafa/pol-it-car:${{ steps.remove-slashes.outputs.value }} --platform linux/arm/v7
+          docker push ghcr.io/httprafa/pol-it-car:${{ steps.remove-slashes.outputs.value }}
