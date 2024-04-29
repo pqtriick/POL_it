@@ -124,7 +124,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
       ),
       Slider(
           value: _sliderTimeValue,
-          divisions: 9,
+          divisions: 9*100,
           // If we use more we spam the server with requests
           min: 1,
           max: 10,
@@ -148,11 +148,11 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
     if (widget.copyNode != null) {
       widget.copyNode!.directions = _directions.toList();
       widget.copyNode!.speed = _sliderSpeedValue.toInt();
-      widget.copyNode!.time = _sliderTimeValue.toInt();
+      widget.copyNode!.time = _sliderTimeValue;
       widget.callback(widget.copyNode!);
     } else {
       var node = CarRouteNode(_directions.toList(), _sliderSpeedValue.toInt(),
-          _sliderTimeValue.toInt());
+          _sliderTimeValue);
       widget.callback(node);
     }
 
