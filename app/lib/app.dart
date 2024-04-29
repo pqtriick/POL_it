@@ -17,7 +17,6 @@ class CarControlApp extends StatelessWidget {
     const String title = 'Car Controller';
     initState();
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
       title: title,
       home: MainScreen(),
     );

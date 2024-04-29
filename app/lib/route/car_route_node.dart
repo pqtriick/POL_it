@@ -12,7 +12,7 @@ class CarRouteNode {
 
   Future runNode() async {
     await CarState.sendUpdates(directions.toSet(), speed);
-    await Future.delayed(Duration(seconds: time));
+    await Future.delayed(Duration(milliseconds: time));
   }
 
   String generateInfoText() {
