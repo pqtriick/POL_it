@@ -20,7 +20,7 @@ class AddNodeScreen extends StatefulWidget {
 class _AddNodeScreenState extends State<AddNodeScreen> {
 
   double _sliderSpeedValue = Endpoint.maxSpeed.toDouble();
-  double _sliderTimeValue = 10.toDouble();
+  double _sliderTimeValue = 10*1000.toDouble();
   Set<Direction> _directions = {};
 
   @override
@@ -119,15 +119,15 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
               })
       ),
       const SizedBox(height: 20,),
-      Text('Time : ${_sliderTimeValue.round()} seconds',
+      Text('Time : ${_sliderTimeValue.toInt()} ms',
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(
           value: _sliderTimeValue,
-          divisions: 9*100,
+          divisions: 100,
           // If we use more we spam the server with requests
-          min: 1,
-          max: 10,
+          min: 250,
+          max: 10*1000,
           activeColor: Colors.indigoAccent,
           inactiveColor: Colors.indigo,
           onChanged: (double value) =>
@@ -148,11 +148,11 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
     if (widget.copyNode != null) {
       widget.copyNode!.directions = _directions.toList();
       widget.copyNode!.speed = _sliderSpeedValue.toInt();
-      widget.copyNode!.time = _sliderTimeValue;
+      widget.copyNode!.time = _sliderTimeValue.toInt();
       widget.callback(widget.copyNode!);
     } else {
       var node = CarRouteNode(_directions.toList(), _sliderSpeedValue.toInt(),
-          _sliderTimeValue);
+          _sliderTimeValue.toInt());
       widget.callback(node);
     }
 

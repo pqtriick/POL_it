@@ -6,13 +6,13 @@ class CarRouteNode {
 
   List<Direction> directions;
   int speed;
-  double time;
+  int time;
 
   CarRouteNode(this.directions, this.speed, this.time);
 
   Future runNode() async {
     await CarState.sendUpdates(directions.toSet(), speed);
-    await Future.delayed(Duration(milliseconds: (time*1000).toInt()));
+    await Future.delayed(Duration(milliseconds: time));
   }
 
   String generateInfoText() {
