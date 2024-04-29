@@ -36,7 +36,7 @@ class AppStorage {
       _endpointCache = jsonDecode(data);
       return _endpointCache!;
     }
-    return Endpoint("192.168.0.144:8000");
+    return Endpoint("192.168.137.211:8000"); // Default value for testing and example
   }
 
   static List<CarRoute> pullRoutes() {

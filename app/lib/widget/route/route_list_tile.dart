@@ -5,9 +5,10 @@ class CarRouteListTile extends StatelessWidget {
 
   final CarRoute route;
   final Function(CarRoute) runCallback;
+  final Function(CarRoute) stopCallback;
   final Function(CarRoute) editCallback;
 
-  const CarRouteListTile(this.route, this.runCallback, this.editCallback,
+  const CarRouteListTile(this.route, this.runCallback, this.stopCallback, this.editCallback,
       {super.key});
 
   @override
@@ -18,7 +19,13 @@ class CarRouteListTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          ElevatedButton(
+          route.isRunning() ? ElevatedButton(
+            onPressed: () => stopCallback(route),
+            child: const Icon(
+                Icons.stop,
+                color: Colors.blue
+            ),
+          ) : ElevatedButton(
             onPressed: () => runCallback(route),
             child: const Icon(
                 Icons.play_arrow,

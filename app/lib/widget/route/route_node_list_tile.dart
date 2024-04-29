@@ -7,12 +7,15 @@ class CarRouteNodeListTile extends StatelessWidget {
   final Function(CarRouteNode) editCallback;
   final Function(CarRouteNode) deleteCallback;
 
-  const CarRouteNodeListTile(this.node, this.editCallback, this.deleteCallback, {super.key});
+  const CarRouteNodeListTile(this.node, this.editCallback, this.deleteCallback,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(node.directions.isNotEmpty ? "Move for ${node.time} sec" : "Delay for ${node.time} sec"),
+      title: Text(node.directions.isNotEmpty
+          ? "Move for ${node.time} sec"
+          : "Delay for ${node.time} sec"),
       subtitle: Text(
           node.directions.isEmpty ? "No movement" : node.generateInfoText()),
       trailing: Row(
