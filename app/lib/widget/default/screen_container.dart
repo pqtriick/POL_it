@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class DefaultScreenContainer extends StatelessWidget {
 
@@ -12,7 +12,7 @@ class DefaultScreenContainer extends StatelessWidget {
       body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/background.jpg'),
+              image: AssetImage("assets/background.jpg"),
               fit: BoxFit.cover,
             ),
           ),

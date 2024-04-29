@@ -1,5 +1,5 @@
-import 'package:car/screens/main_screen.dart';
-import 'package:flutter/material.dart';
+import "package:car/screens/main_screen.dart";
+import "package:flutter/material.dart";
 
 class CustomAppBar extends StatelessWidget {
 

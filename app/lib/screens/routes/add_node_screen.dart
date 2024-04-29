@@ -1,9 +1,9 @@
-import 'package:car/network/endpoint.dart';
-import 'package:car/route/car_route_node.dart';
-import 'package:car/storage/state.dart';
-import 'package:car/widget/default/custom_app_bar.dart';
-import 'package:car/widget/default/screen_container.dart';
-import 'package:flutter/material.dart';
+import "package:car/network/endpoint.dart";
+import "package:car/route/car_route_node.dart";
+import "package:car/storage/state.dart";
+import "package:car/widget/default/custom_app_bar.dart";
+import "package:car/widget/default/screen_container.dart";
+import "package:flutter/material.dart";
 
 class AddNodeScreen extends StatefulWidget {
 
@@ -101,7 +101,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
         ],
       ),
       const SizedBox(height: 20),
-      Text('PWM : ${_sliderSpeedValue.round()}',
+      Text("PWM : ${_sliderSpeedValue.round()}",
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(
@@ -119,7 +119,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
               })
       ),
       const SizedBox(height: 20,),
-      Text('Dauer : ${_sliderTimeValue.toInt()} ms',
+      Text("Dauer : ${_sliderTimeValue.toInt()} ms",
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(
