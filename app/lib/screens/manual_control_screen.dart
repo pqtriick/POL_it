@@ -30,7 +30,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
         color: Colors.black,
         onPressed: _toggleTiltControls,
       )),
-      const SizedBox(height: 120),
+      const SizedBox(height: 25),
       //Space Between Title and Button Container
       Container(
         padding: const EdgeInsets.all(8),

@@ -37,7 +37,7 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
       const CustomAppBar("STM32 Auto Steuerung"),
-      const SizedBox(height: 120),
+      const SizedBox(height: 25),
       GridView.count(
         crossAxisCount: 4,
         shrinkWrap: true,
