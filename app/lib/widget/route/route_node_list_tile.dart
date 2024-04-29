@@ -14,10 +14,10 @@ class CarRouteNodeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(node.directions.isNotEmpty
-          ? "Move for ${node.time} sec"
-          : "Delay for ${node.time} sec"),
+          ? "Bewege für ${node.time} Sekunden"
+          : "Warte für ${node.time} Sekunden"),
       subtitle: Text(
-          node.directions.isEmpty ? "No movement" : node.generateInfoText()),
+          node.directions.isEmpty ? "Keine Bewegung" : node.generateInfoText()),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
