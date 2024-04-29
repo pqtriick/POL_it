@@ -69,7 +69,7 @@ class _ManualControlScreenState extends State<ManualControlScreen> {
         ),
       ),
       const SizedBox(height: 50),
-      Text('Geschwindigkeit (PWM) : ${_sliderValue.round()}',
+      Text('PWM : ${_sliderValue.round()}',
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(

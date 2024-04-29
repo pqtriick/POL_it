@@ -20,7 +20,7 @@ class AddNodeScreen extends StatefulWidget {
 class _AddNodeScreenState extends State<AddNodeScreen> {
 
   double _sliderSpeedValue = Endpoint.maxSpeed.toDouble();
-  double _sliderTimeValue = 10*1000.toDouble();
+  double _sliderTimeValue = (5*1000.toDouble()) / 2;
   Set<Direction> _directions = {};
 
   @override
@@ -119,15 +119,15 @@ class _AddNodeScreenState extends State<AddNodeScreen> {
               })
       ),
       const SizedBox(height: 20,),
-      Text('Dauer : ${_sliderTimeValue.toInt()} Sekunden',
+      Text('Dauer : ${_sliderTimeValue.toInt()} ms',
         style: (const TextStyle(color: Colors.black, fontSize: 30)),
       ),
       Slider(
           value: _sliderTimeValue,
-          divisions: 100,
+          divisions: 5*1000,
           // If we use more we spam the server with requests
           min: 250,
-          max: 10*1000,
+          max: 5*1000,
           activeColor: Colors.indigoAccent,
           inactiveColor: Colors.indigo,
           onChanged: (double value) =>

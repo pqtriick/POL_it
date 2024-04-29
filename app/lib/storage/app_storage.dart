@@ -33,7 +33,7 @@ class AppStorage {
 
     final data = _preferences.getString(_keyEndpoint);
     if (data != null) {
-      _endpointCache = jsonDecode(data);
+      _endpointCache = Endpoint.fromJson(jsonDecode(data));
       return _endpointCache!;
     }
     return Endpoint("192.168.137.211:8000"); // Default value for testing and example

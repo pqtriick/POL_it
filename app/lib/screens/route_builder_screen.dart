@@ -29,7 +29,7 @@ class RouteBuilderScreenState extends State<RouteBuilderScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultScreenContainer([
-      CustomAppBar("Route Builder", leading: IconButton(
+      CustomAppBar("Routen Ersteller", leading: IconButton(
         icon: const Icon(Icons.add),
         iconSize: 40,
         color: Colors.black,
@@ -48,7 +48,7 @@ class RouteBuilderScreenState extends State<RouteBuilderScreen> {
 
   void _runRoute(CarRoute route) {
     setState(() {
-      route.run();
+      route.run(setState);
     });
   }
 

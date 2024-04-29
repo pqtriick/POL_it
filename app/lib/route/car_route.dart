@@ -10,12 +10,12 @@ class CarRoute {
 
   CarRoute(this.name, this.nodes);
 
-  Future run() async {
+  Future run(Function(void Function()) setState) async {
     runningRoute = this;
-    await _runInternal();
+    await _runInternal(setState);
   }
 
-  Future _runInternal() async {
+  Future _runInternal(Function(void Function()) setState) async {
     var endpoint = AppStorage.pullEndpoint();
     for (var node in nodes) {
       if(runningRoute != this) break;
@@ -23,6 +23,7 @@ class CarRoute {
     }
     await endpoint.stopAll();
     stopCurrent();
+    setState(() {});
   }
 
   bool isRunning() {
