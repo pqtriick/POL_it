@@ -10,7 +10,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'ci skip')"
     steps:
       - name: Run find-and-replace to remove slashes
-        uses: mad9000/actions-find-and-replace-string@5
+        uses: mad9000/actions-find-and-replace-string@c752ea3069b46f62702ff335bf57ea6fa769ed5b
         id: remove-slashes
         with:
           source: ${{ github.ref_name }}
@@ -35,7 +35,7 @@ jobs:
         run: flutter build apk
       - name: Copy files
         run: |
-          mv app/build/app/outputs/flutter-apk/app-release.apk app+${{ steps.remove-slashes.outputs.value }}.${{ github.run_number }}.apk
+          mv app/build/app/outputs/flutter-apk/app-release.apk "app+${{ steps.remove-slashes.outputs.value }}.${{ github.run_number }}.apk"
       - name: "Upload file"
         uses: appleboy/discord-action@master
         with:

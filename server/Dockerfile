@@ -1,4 +1,4 @@
-FROM rust as builder
+FROM rust:latest as builder
 
 WORKDIR /usr/src/car-server
 COPY . .
