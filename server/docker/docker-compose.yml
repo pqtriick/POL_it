@@ -1,6 +1,6 @@
 services:
   server:
-    image: ghcr.io/httprafa/pol-it-car:latest
+    image: ghcr.io/httprafa/pol-it-car:main
     restart: unless-stopped
     ports:
       - 8000:8000
