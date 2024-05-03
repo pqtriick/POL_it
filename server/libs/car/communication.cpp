@@ -14,7 +14,8 @@ bool Connection::available() {
 
 Packet* Connection::readPacket() {
     // Create buffer of size BUFFER_SIZE
-    unsigned char buffer[BUFFER_SIZE];
+    // Create space for the packet data
+    unsigned char* buffer = new unsigned char[BUFFER_SIZE];
 
     unsigned char size = this->connectionSerial->read();
     if(size > BUFFER_SIZE) {
@@ -30,6 +31,10 @@ Packet* Connection::readPacket() {
 Packet::Packet(unsigned char* buffer, unsigned char size) {
     this->buffer = buffer;
     this->size = size;
+}
+
+Packet::~Packet() {
+    delete[] this->buffer;
 }
 
 PacketType Packet::readType() {
