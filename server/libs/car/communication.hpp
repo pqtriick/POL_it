@@ -27,6 +27,7 @@ class Packet {
         unsigned char offset = 0;
     public:
         Packet(unsigned char* buffer, unsigned char size);
+        ~Packet();
         PacketType readType();
         Direction readDirection();
         Side readSide();
