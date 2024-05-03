@@ -1,4 +1,4 @@
-### Setup dev environment
+## Setup dev environment
 #### Install rustup target
 ```rustup target add arm-unknown-linux-gnueabihf```
 #### Install linker and gcc
